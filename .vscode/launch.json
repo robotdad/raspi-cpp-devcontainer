@@ -1,0 +1,94 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${command:cmake.launchTargetPath}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug Pi",
+            "type": "cppdbg",
+            "request": "launch",
+            "variables": {
+                "device": "${command:C_Cpp.activeSshTarget}",
+                "localhost": "127.0.0.1",
+                "port": "22100",
+                "program": "${command:cmake.launchTargetPath}",
+                "targetDir": "/home/pi",
+                "targetFilePath": "${targetDir}/${command:cmake.launchTargetFilename}"
+            },
+            "cwd": "${workspaceFolder}",
+            "program": "${program}",
+            "stopAtEntry": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb-multiarch",
+            "miDebuggerServerAddress": "${localhost}:${port}",
+            "deploySteps": [
+                {
+                    "type": "scp",
+                    "files": "${program}",
+                    "host": "${device}",
+                    "targetDir": "${targetDir}"
+                },
+                {
+                    "type": "ssh",
+                    "host": {
+                        "hostName": "${device}",
+                        "localForwards": [
+                            {
+                                "bindAddress": "${localhost}",
+                                "port": "${port}",
+                                "host": "localhost",
+                                "hostPort": "${port}"
+                            }
+                        ]
+                    },
+                    "command": "gdbserver :${port} ${targetFilePath}",
+                    "continueOn": "Listening on port",
+                    "debug": true
+                },
+                {
+                    "type": "ssh",
+                    "host": "${device}",
+                    "command": "${targetFilePath}",
+                    "debug": false
+                }
+            ],
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

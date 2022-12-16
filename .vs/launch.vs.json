@@ -1,0 +1,27 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "cppgdb",
+      "name": "Hello build machine",
+      "project": "CMakeLists.txt",
+      "projectTarget": "Hello",
+      "comment": "Debug on build host, set to Linux Debug configuration",
+      "debuggerConfiguration": "gdb",
+      "MIMode": "gdb",
+      "args": [],
+      "env": {},
+      "isDefaultConfiguration": true
+    },
+    {
+      "type": "cppgdb",
+      "name": "Hello Pi (Remote Debug)",
+      "project": "CMakeLists.txt",
+      "projectTarget": "Hello",
+      "debuggerConfiguration": "gdbserver",
+      "comment": "Deploy and debug on Pi, add to Connection Manager and specify remoteMachineName, set to Pi3 or Pi3 Debug configuration",
+      "remoteMachineName": "192.168.1.200"
+    }
+  ]
+}

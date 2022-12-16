@@ -1,0 +1,8 @@
+{
+	"name": "Host",
+	"dockerFile": "Dockerfile",
+	"extensions": [
+		"ms-vscode.cmake-tools",
+		"ms-vscode.cpptools"
+	]
+}

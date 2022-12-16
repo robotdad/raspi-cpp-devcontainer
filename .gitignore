@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+# Visual Studio
+out/
+/.vs/*
+!/.vs/launch.vs.json
