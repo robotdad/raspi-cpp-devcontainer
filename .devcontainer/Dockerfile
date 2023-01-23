@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM mcr.microsoft.com/devcontainers/base:ubuntu-20.04
 
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update -y && \
