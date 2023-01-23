@@ -21,7 +21,10 @@
       "projectTarget": "Hello",
       "debuggerConfiguration": "gdbserver",
       "comment": "Deploy and debug on Pi, add to Connection Manager and specify remoteMachineName, set to Pi3 or Pi3 Debug configuration",
-      "remoteMachineName": "192.168.1.200"
+      "remoteMachineName": "192.168.1.200",
+      "MIMode": "gdb",
+      "args": [],
+      "env": {}
     }
   ]
 }
